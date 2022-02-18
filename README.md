@@ -20,3 +20,9 @@ It shows how to create a concurrent net.Listener simply putting the **handleConn
 ``` go
     go handleConn(cn)
 ```
+
+### 5. Enhanced netcat
+Using the **make 5_clock** command we can run both: 
+- 3 servers with 3 timezones
+- a client consulting the 3 timezones within 3 goroutines during 15 secs (the clients are run after 5 sec sleep)
+

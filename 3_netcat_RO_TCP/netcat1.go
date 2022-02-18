@@ -13,6 +13,8 @@ import (
 // It can be used to test the clock app from the previous section
 func main() {
 	portNum := flag.String("port", "8080", "port to be dialed to")
+	flag.Parse()
+	log.Printf("port num: %s", *portNum)
 	cn, err := net.Dial("tcp", "localhost:"+*portNum)
 	if err != nil {
 		log.Fatal(err)

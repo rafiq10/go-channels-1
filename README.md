@@ -16,6 +16,7 @@ It can be used instead of nc to test the previous example from section num 2
 ### 4. Clock2
 It shows how to create a concurrent net.Listener simply putting the **handleConn** function into goroutine:
 
+:arrow_lower_right:
 ``` go
-    :arrow_lower_right: go handleConn(cn)
+    go handleConn(cn)
 ```

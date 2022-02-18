@@ -1,16 +1,17 @@
-package spinner
+package main
 
 import (
 	"fmt"
 	"time"
 )
 
-func SpinnerMain() {
+func main() {
 	const n = 45
-	go spinner(1 * time.Second)
 
+	go spinner(1 * time.Second)
 	res := fib(n)
-	fmt.Printf("\rFibonacci(%d) = %d\n ", n, res)
+	fmt.Printf("\rFibonacci(%d) = %d\n", n, res)
+
 }
 
 func spinner(delay time.Duration) {
@@ -27,5 +28,4 @@ func fib(n int) int {
 		return n
 	}
 	return fib(n-1) + fib(n-2)
-
 }

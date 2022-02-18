@@ -8,3 +8,6 @@ It shows just a goroutin functioning
 ### 2. Clock1 
 It shows an inefficient net.listener that serves one connection at a time
 (use nc localhost 8080 twice in a separate terminals to see that the second connection is server only when the first one is killed)
+
+### 3. Netcat1
+It can be used instead of nc to test the previous example from section num 2

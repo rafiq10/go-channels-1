@@ -29,3 +29,9 @@ sleep:
 
 5_clock_client:
 	@go run ./5-clock-and-client-concurrent/netcat2.go NewYork=8010 Tokyo=8020 London=8030	
+
+6_interactive_client:
+	@go run ./6-reverb-multiple-go-routines-echo/client/client.go	
+
+6_server:
+	@go run ./6-reverb-multiple-go-routines-echo/server/server.go	

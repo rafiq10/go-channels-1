@@ -26,3 +26,8 @@ Using the ***"make 5_clock"*** command we can run both:
 - 3 servers with 3 timezones
 - a client consulting the 3 timezones within 3 goroutines during 15 secs (the clients are run after 5 sec sleep)
 
+
+### 6. Interactive client
+Using ***"make 5_clock6_server"*** and ***"make 6_interactive_client"*** in a separate terminal
+we can play in the client terminal by writing a phrase and receiving 3 responses (uppercase, normal and lowercase) every second for each phrase we write
+

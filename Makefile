@@ -35,3 +35,9 @@ sleep:
 
 6_server:
 	@go run ./6-reverb-multiple-go-routines-echo/server/server.go	
+
+7_interactive_client:
+	@go run ./7-reverb-multiple-go-routines-echo-2/client/client.go
+		
+7_server:
+	@go run ./7-reverb-multiple-go-routines-echo-2/server/server.go

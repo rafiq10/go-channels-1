@@ -28,6 +28,11 @@ Using the ***"make 5_clock"*** command we can run both:
 
 
 ### 6. Interactive client
-Using ***"make 5_clock6_server"*** and ***"make 6_interactive_client"*** in a separate terminal
+Using ***"make 6_server"*** and ***"make 6_interactive_client"*** in a separate terminal
 we can play in the client terminal by writing a phrase and receiving 3 responses (uppercase, normal and lowercase) every second for each phrase we write
 
+
+### 7. Interactive client - 2
+Using ***"make 7_server"*** and ***"make 7_interactive_client"*** 
+the same result as in pt. 6but the order of responses is not guaranteed 
+due to gorouting for the echo command

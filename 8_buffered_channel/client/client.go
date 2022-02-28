@@ -8,9 +8,9 @@ import (
 	"os"
 )
 
-type closer interface {
-	CloseRead() error
-}
+// type closer interface {
+// 	CloseWrite() error
+// }
 
 func main() {
 	numPort := flag.String("port", "8080", "port numberto dial")
@@ -29,9 +29,9 @@ func main() {
 		done <- struct{}{} // signal the main goroutine
 	}()
 	mustCopy(cn, os.Stdin)
-	c, ok := cn.(closer)
+	c, ok := cn.(interface{ CloseWrite() error })
 	if ok {
-		c.CloseRead()
+		c.CloseWrite()
 	} else {
 		cn.Close()
 	}

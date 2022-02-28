@@ -36,3 +36,7 @@ we can play in the client terminal by writing a phrase and receiving 3 responses
 Using ***"make 7_server"*** and ***"make 7_interactive_client"*** 
 the same result as in pt. 6but the order of responses is not guaranteed 
 due to gorouting for the echo command
+
+### 8. Interactive client - 3
+The same as previous examples, but the client closes only write operations, 
+so it can keep on reading from the server.

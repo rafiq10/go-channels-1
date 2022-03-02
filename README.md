@@ -46,3 +46,30 @@ An example of an infinite pipeline where the first goroutine generates natural n
 The second goroutine (squarer) reads from channel "naturals" unblocking it, squares the natural number and sends the squared number to the "squares" channel (blocking it).
 The main goroutine then reads the "squares" channel (once there is something in it and unblocking it). All the goroutines (including the main one) work in infinite loops.
 Ommitting the for loop (i.e. in the Squarer goroutine) results in fatal error: "all goroutines are asleep - deadlock".
+
+### 9. A Finite pipeline
+The pipeline is different as it closes channels (both "naturals" and "squares") when it finishes the job.
+A goroutine knows the channel is closed if we use "x, ok := <-" special structer to receive values and then check the "ok" variable,as in the commented code:
+``` go
+for {
+		i, ok := <-naturals
+		if !ok {
+		    break //channel was closed and drained
+		}
+		squares <- i * i
+	}
+    defer close(squares)
+```
+
+A cleaner way, though, is using the "for range" structure:
+``` go
+for i := range naturals{
+    squares <- i * i
+    } 
+    defer lose(squares)
+```
+
+Itis necessary to close a channel ONLY when it is important to tell the receiving goroutines that all data have been sent (the channel has been **drained**).
+Attempting to close an already-closed channel or a nil channel causes **panic**.
+Garbage collector doen NOT need a channel to be closed to reclaim its resources - don't care about it.
+Close the hannel *ONLY* if you need to communicate the end of the action to oher goroutines.

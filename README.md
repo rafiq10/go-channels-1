@@ -40,3 +40,9 @@ due to gorouting for the echo command
 ### 8. Interactive client - 3
 The same as previous examples, but the client closes only write operations, 
 so it can keep on reading from the server.
+
+### 9. Infinite pipeline
+An example of an infinite pipeline where the first goroutine generates natural numbers and sends them to "naturals" channel (blocking it).
+The second goroutine (squarer) reads from channel "naturals" unblocking it, squares the natural number and sends the squared number to the "squares" channel (blocking it).
+The main goroutine then reads the "squares" channel (once there is something in it and unblocking it). All the goroutines (including the main one) work in infinite loops.
+Ommitting the for loop (i.e. in the Squarer goroutine) results in fatal error: "all goroutines are asleep - deadlock".

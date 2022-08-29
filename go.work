@@ -2,4 +2,5 @@ go 1.18
 
 use (
     ./10_pipeline3/
+    ./11_thumbnail_1/
 )

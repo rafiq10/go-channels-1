@@ -79,13 +79,14 @@ func makeThumbnails2(filenames []string) (thumbfiles []string, err error) {
 }
 
 func makeThumbnails3(filenames <-chan string) int64 {
-
-	sizes := make(chan int64, len(filenames))
+	// number of iterations unknown ahead (channel as input)
+	sizes := make(chan int64)
 	var wg sync.WaitGroup // number of working goroutines
 
 	for f := range filenames {
-		fmt.Println(f)
+		fmt.Println("loop starts for file: " + f)
 		wg.Add(1)
+		fmt.Println("afterwg.Add(): " + f)
 		// worker
 		go func(f string) {
 			defer func() {
@@ -95,7 +96,7 @@ func makeThumbnails3(filenames <-chan string) int64 {
 			fmt.Println("getting thumb: " + f)
 			thumb, err := ImageFile(f)
 			if err != nil {
-				log.Println(err)
+				fmt.Println(err)
 				return
 			}
 			info, _ := os.Stat(thumb) // OK to ignore error
@@ -109,14 +110,19 @@ func makeThumbnails3(filenames <-chan string) int64 {
 
 	var total int64
 	go func() {
+		// this goroutine starts only if closing the 'filenames' channel in the goroutin
+		// close operation is a signal to the waitgroup
 		fmt.Println("before wg.Wait()")
 		wg.Wait()
-		fmt.Println("after wg.Wait()")
+		fmt.Println("before close(sizes)")
 		close(sizes)
 		fmt.Println("after close(sizes)")
 	}()
+
 	for size := range sizes {
+		// it adds every size after each wg.Done() in the first goroutine
 		total += size
+		fmt.Println(fmt.Sprintf("Total size: %d", total))
 	}
 
 	return total
